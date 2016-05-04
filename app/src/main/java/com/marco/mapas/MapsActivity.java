@@ -1,5 +1,6 @@
 package com.marco.mapas;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
+    //http://www.coordenadas-gps.com/
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -59,7 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             case R.id.binterior:
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(-33.8697,151.2089),18
+                        //new LatLng(-33.8697,151.2089),18
+                        new LatLng(19.436209, -99.15463),20
                 ));
                 break;
         }
@@ -82,5 +86,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcador))
+                        .anchor(0.0f,1.0f)
+                        .position(latLng)
+                );
+            }
+        });
     }
 }
