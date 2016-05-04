@@ -19,6 +19,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Button bmapa;
     Button bterreno;
     Button bhibrido;
+    Button binterior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         bmapa = (Button)findViewById(R.id.bmapa);
         bterreno = (Button)findViewById(R.id.bterreno);
         bhibrido = (Button)findViewById(R.id.bhibrido);
+        binterior = (Button)findViewById(R.id.binterior);
 
         bmapa.setOnClickListener(this);
         bterreno.setOnClickListener(this);
         bhibrido.setOnClickListener(this);
+        binterior.setOnClickListener(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -53,6 +56,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case R.id.bhibrido:
                 mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
             break;
+
+            case R.id.binterior:
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                        new LatLng(-33.8697,151.2089),18
+                ));
+                break;
         }
     }
 
